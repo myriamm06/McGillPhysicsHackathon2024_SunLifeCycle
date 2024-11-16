@@ -71,7 +71,7 @@ class chart:
 
     # Square properties
     rectangle_base = 180
-    rectangle_height = 250
+    rectangle_height = 110
     x, y = 410, 10
 
     # Font for labels
@@ -94,13 +94,13 @@ class chart:
         stage_label = font.render("Stage: " + get_star_phase(5), True, WHITE)  # Render text
         stage_label_rect = stage_label.get_rect(topleft=(x + 5, y + 5)) # stage label position
         energy_label = font.render("Energy per second (E = mc^2):", True, WHITE)
-        energy_label_rect = energy_label.get_rect(topleft=(x + 5, y + 105)) # energy label position
+        energy_label_rect = energy_label.get_rect(topleft=(x + 5, y + 35)) # energy label position
         energy_result_label = font.render(str(calculate_energy(4.28*10**9)), True, WHITE)
-        energy_result_label_rect = energy_result_label.get_rect(topleft=(x+5, y+120))
+        energy_result_label_rect = energy_result_label.get_rect(topleft=(x+5, y+50))
         time_dilation_label = font.render("Gamma factor:", True, WHITE)
-        time_dilation_label_rect = time_dilation_label.get_rect(topleft=(x + 5, y + 205)) # time dilation label position
+        time_dilation_label_rect = time_dilation_label.get_rect(topleft=(x + 5, y + 80)) # time dilation label position
         gamma_result_label = font.render(str(calculate_gamma(1.9 * 10**30, 6.96 * 10**8)), True, WHITE)
-        gamma_result_label_rect = energy_result_label.get_rect(topleft=(x+5, y+220))
+        gamma_result_label_rect = energy_result_label.get_rect(topleft=(x+5, y+95))
 
         # Draw the label
         screen.blit(stage_label, stage_label_rect) 
