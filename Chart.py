@@ -40,7 +40,23 @@ class Chart:
         else:
             return "White Dwarf"
     
-    def calculate_energy(self, mass):
+    def calculate_energy(self, age):
+        c = 299792458  # Speed of light in m/s
+        if age < 50000000:
+            return (1.809e27)/365/24/60/60
+        
+        elif age < 10050000000:
+            return (1.215e28)/365/24/60/60
+        
+        elif age < 11050000000:
+            return (1.215e31)/365/24/60/60
+        
+        elif age < 11050010000:
+            return (1.215e25)/365/24/60/60
+        
+        else:
+            return (1.215e25)/365/24/60/60
+       
         """
         Calculates energy produced per second using E=mc^2.
 
@@ -50,8 +66,7 @@ class Chart:
         Returns:
         float: Energy in Joules.
         """
-        c = 299792458  # Speed of light in m/s
-        return mass * c**2
+        
     
     def calculate_gamma(self, mass, radius):
         """
@@ -79,8 +94,8 @@ class Chart:
 
         # Render the labels
         stage_label = self.font.render("Stage: " + self.get_star_phase(years), True, WHITE)
-        energy_label = self.font.render("Energy per second (E = mc^2):", True, WHITE)
-        energy_result_label = self.font.render(str(self.calculate_energy(4.28 * 10**9)), True, WHITE)
+        energy_label = self.font.render("MegaJoules per second (E = mc^2):", True, WHITE)
+        energy_result_label = self.font.render(f"{self.calculate_energy(years):.2e}", True, WHITE)
         time_dilation_label = self.font.render("Gamma factor:", True, WHITE)
         gamma_result_label = self.font.render(str(self.calculate_gamma(1.9 * 10**30, 6.96 * 10**8)), True, WHITE)
 
