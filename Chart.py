@@ -67,8 +67,28 @@ class Chart:
         float: Energy in Joules.
         """
         
-    
-    def calculate_gamma(self, mass, radius):
+
+    def calculate_gamma(self, phase_name):
+
+        phase = self.get_star_phase(phase_name)
+
+        if phase == "Protostar":
+            mass = 1.989 * 10**30
+            radius = 10**11
+        elif phase == "Main Sequence":
+            mass = 1.989 * 10**30
+            radius = 7 * 10**8
+        elif phase == "Red Giant":
+            mass = 0.65 * 1.989 * 10**30
+            radius = 1.5 * 10**11
+        elif phase == "Planetary Nebula":
+            mass = 0.65 * 1.989 * 10**30
+            radius = 5 * 10**15
+        elif phase == "White Dwarf":
+            mass = 0.5 * 1.989 * 10**30
+            radius = 6 * 10**6
+
+
         """
         Determines the gamma factor.
 
@@ -79,7 +99,7 @@ class Chart:
         Returns:
         float: Gamma factor.
         """
-        c = 3 * 10**8  # Speed of light in m/s
+        c = 299792458  # Speed of light in m/s
         return 1 / math.sqrt(1 - (2 * 6.67 * 10**-11 * mass) / (radius * c**2))
 
     def draw(self, years):
@@ -97,7 +117,7 @@ class Chart:
         energy_label = self.font.render("MegaJoules per second (E = mc^2):", True, WHITE)
         energy_result_label = self.font.render(f"{self.calculate_energy(years):.2e}", True, WHITE)
         time_dilation_label = self.font.render("Gamma factor:", True, WHITE)
-        gamma_result_label = self.font.render(str(self.calculate_gamma(1.9 * 10**30, 6.96 * 10**8)), True, WHITE)
+        gamma_result_label = self.font.render(str(self.calculate_gamma(years)), True, WHITE)
 
         # Blit the labels to the screen
         self.screen.blit(stage_label, (self.x + 5, self.y + 5))
