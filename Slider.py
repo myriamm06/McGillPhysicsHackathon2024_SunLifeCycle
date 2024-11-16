@@ -22,22 +22,21 @@ class Slider:
     def draw(self, font, ticks=10):
         # Draw the slider
         pygame.draw.rect(self.screen, (200, 200, 200), (self.x, self.y - self.height // 2, self.width, self.height))
-        pygame.draw.circle(self.screen, (255, 246, 0), (self.handle_x, self.y), self.handle_radius)
 
         # Draw ticks and numbers
         for i in range(ticks + 1):
             tick_x = self.x + i * (self.width / ticks)
             pygame.draw.line(self.screen, (0, 0, 0), (tick_x, self.y - 10), (tick_x, self.y + 10), 2)
-
+        
             # # Draw numbers
             # tick_value = self.min_value + i * (self.max_value - self.min_value) / ticks
             # number_text = font.render(f"{tick_value:.2e}", True, (0, 0, 0))
             # self.screen.blit(number_text, (tick_x - number_text.get_width() // 2, self.y + 15))
 
         # Display the current value
-        value_text = font.render(f"Value: {self.current_value:.2e}", True, (0, 0, 0))
+        value_text = font.render(f"Age: {self.current_value:.2e}", True, (0, 0, 0))
         self.screen.blit(value_text, (self.x + self.width // 2 - value_text.get_width() // 2, self.y - 40))
-
+        pygame.draw.circle(self.screen, (255, 246, 0), (self.handle_x, self.y), self.handle_radius)
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left mouse button
