@@ -12,9 +12,9 @@ class Chart:
         self.screen = screen
 
         # Square properties
-        self.rectangle_base = 180
+        self.rectangle_base = 200
         self.rectangle_height = 110
-        self.x, self.y = 610, 10  # Chart position
+        self.x, self.y = 590, 10  # Chart position
 
         # Font for labels
         self.font = pygame.font.Font(None, 16)  # Default font with size 16
@@ -57,17 +57,6 @@ class Chart:
         else:
             return (1.215e25)/365/24/60/60
        
-        """
-        Calculates energy produced per second using E=mc^2.
-
-        Parameters:
-        mass (float): Mass in kilograms.
-
-        Returns:
-        float: Energy in Joules.
-        """
-        
-
     def calculate_gamma(self, phase_name):
 
         phase = self.get_star_phase(phase_name)
