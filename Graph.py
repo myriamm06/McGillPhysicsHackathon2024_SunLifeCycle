@@ -32,21 +32,24 @@ class Graph:
             self.P_values[i] = self.P_values[i-1] + dP * (self.r_values[i] - self.r_values[i-1])
     
     def plot_pressure_profile(self):
-        """Plot the pressure profile and render it into a Pygame surface."""
+        """Plot the pressure profile and render it into a Pygame surface with a black background."""
         self.solve_equilibrium()  # Ensure the pressure values are calculated
-        
-        # Create the plot using matplotlib
+
+        # Create the plot using matplotlib with a black background
         plt.figure(figsize=(5, 3))  # Aspect ratio suitable for Pygame display
-        plt.plot(self.r_values, self.P_values, label="Pressure Profile")
-        plt.xlabel("Radius (m)")
-        plt.ylabel("Pressure (Pa)")
-        plt.title("Pressure vs Radius")
-        plt.grid(True)
-        plt.legend()
+        plt.style.use("dark_background")  # Set a dark background style
+        plt.plot(self.r_values, self.P_values, label="Pressure Profile", color="cyan")  # Line color for visibility
+
+        # Customize axis and text colors
+        plt.xlabel("Radius (m)", color="white")
+        plt.ylabel("Pressure (Pa)", color="white")
+        plt.title("Pressure vs Radius", color="white")
+        plt.grid(color="gray")  # Grid color for better contrast
+        plt.legend(facecolor="black", edgecolor="white", labelcolor="white")  # Legend styling
 
         # Save the plot to an in-memory buffer
         buf = BytesIO()
-        plt.savefig(buf, format='PNG', bbox_inches='tight')
+        plt.savefig(buf, format='PNG', bbox_inches='tight', facecolor='black')  # Ensure black facecolor
         buf.seek(0)
         plt.close()  # Close the figure to avoid displaying it in a separate window
 
