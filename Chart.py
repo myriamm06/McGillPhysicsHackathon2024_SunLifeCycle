@@ -34,16 +34,17 @@ class Chart:
             return 0
         
         elif age < 1e10:
-            return (1.215e28)/365/24/60/60
+            # return (1.215e28)/365/24/60/60
+            return ((1.35e17*c*c)/10**6/365/24/60/60)
         
         elif age < 1.2e10:
-            return (1.215e31)/365/24/60/60
+            return ((1.35e20*c*c)/10**6/365/24/60/60)
         
         elif age < 1.3e10:
             0
         
         else:
-            return (1.215e25)/365/24/60/60
+            0
     
     # Calculates gamma factor
     def calculate_gamma(self, phase_name):
