@@ -98,9 +98,15 @@ class Chart:
         WHITE = (255, 255, 255)
         BLACK = (0, 0, 0)
 
-        # Draw the rectangle
-        pygame.draw.rect(self.screen, BLACK, (self.x, self.y, self.rectangle_base, self.rectangle_height))
+        # Create a transparent surface
+        transparent_surface = pygame.Surface((self.rectangle_base, self.rectangle_height), pygame.SRCALPHA)
 
+        # Fill the surface with a color and alpha value (e.g., 128 for 50% transparency)
+        transparent_surface.fill((0, 0, 0, 128))  # RGBA: Black with 50% transparency
+
+        # Blit the transparent surface onto the main screen
+        self.screen.blit(transparent_surface, (self.x, self.y))
+        
         # Render the labels
         stage_label = self.font.render("Stage: " + self.get_star_phase(years), True, WHITE)
         energy_label = self.font.render("MegaJoules per second (E = mc^2):", True, WHITE)
