@@ -22,7 +22,7 @@ class Main:
         self.chart = Chart(self.screen)
         # Matplotlib Figure for the graph
         self.figure = Figure(figsize=(5.2, 4), dpi=80)
-        self.ax = self.figure.add_subplot(110)
+        self.ax = self.figure.add_subplot(111)
         self.ax.set_title("Temperature of the Sun's Surface vs Time")
         self.ax.set_xlabel("Time (Years)")
         self.ax.set_ylabel("Temperature (K)")
