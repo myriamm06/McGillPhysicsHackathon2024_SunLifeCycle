@@ -32,9 +32,11 @@ class Graph:
             self.P_values[i] = self.P_values[i-1] + dP * (self.r_values[i] - self.r_values[i-1])
     
     def plot_pressure_profile(self):
-        """Plot the pressure profile as a Pygame surface."""
-        self.solve_equilibrium()
-        plt.figure(figsize=(5, 3))  # Aspect ratio matches the screen proportions
+        """Plot the pressure profile and render it into a Pygame surface."""
+        self.solve_equilibrium()  # Ensure the pressure values are calculated
+        
+        # Create the plot using matplotlib
+        plt.figure(figsize=(5, 3))  # Aspect ratio suitable for Pygame display
         plt.plot(self.r_values, self.P_values, label="Pressure Profile")
         plt.xlabel("Radius (m)")
         plt.ylabel("Pressure (Pa)")
@@ -46,8 +48,9 @@ class Graph:
         buf = BytesIO()
         plt.savefig(buf, format='PNG', bbox_inches='tight')
         buf.seek(0)
-        plt.close()  # Close the plt figure to avoid opening new windows
+        plt.close()  # Close the figure to avoid displaying it in a separate window
 
-        # Convert the image buffer to a Pygame surface
+        # Load the saved image into Pygame
         return pygame.image.load(buf)
+
 

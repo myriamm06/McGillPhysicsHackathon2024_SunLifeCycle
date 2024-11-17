@@ -34,7 +34,7 @@ class Slider:
             # self.screen.blit(number_text, (tick_x - number_text.get_width() // 2, self.y + 15))
 
         # Display the current value
-        value_text = font.render(f"Age in years: {self.current_value:.2e}", True, (0, 0, 0))
+        value_text = font.render(f"Age in years: {self.current_value:.2e}", True, (255, 255, 255))
         self.screen.blit(value_text, (self.x + self.width // 2 - value_text.get_width() // 2, self.y - 40))
         pygame.draw.circle(self.screen, (255, 246, 0), (self.handle_x, self.y), self.handle_radius)
     def handle_event(self, event):
