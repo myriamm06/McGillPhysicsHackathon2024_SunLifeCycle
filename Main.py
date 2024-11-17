@@ -53,11 +53,6 @@ class Main:
         self.background_music.set_volume(1.0)  # Ensure volume is at maximum
         self.background_music.play(loops=-1)  # Play the music on a loop
 
-        if not pygame.mixer.get_init():
-            print("Pygame mixer not initialized properly!")
-        else:
-            print("Pygame mixer initialized successfully!")
-
     def calculate_temperature(self, time):
         """
         Simulates the temperature of the Sun's surface over time (simplified).
