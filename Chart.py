@@ -2,8 +2,13 @@ import pygame
 import math
 
 class Chart:
-    # Chart constructor
     def __init__(self, screen):
+        """
+        Initializes the chart object.
+        
+        Parameters:
+        screen (pygame.Surface): The Pygame surface to draw on.
+        """
         self.screen = screen
 
         # Square properties
@@ -14,8 +19,16 @@ class Chart:
         # Font for labels
         self.font = pygame.font.Font(None, 20) 
 
-    # Get the stage of the sun depending on the time
     def get_star_phase(self, age):
+        """
+        Determines the phase of a star's life based on its age.
+        
+        Parameters:
+        age (float): The age of the star in billions of years.
+        
+        Returns:
+        str: The phase of the star's life.
+        """
         if age < 1e7:
             return "Protostar"
         elif age < 1e10:
@@ -27,7 +40,6 @@ class Chart:
         else:
             return "White Dwarf"
     
-    # Calculates the energy of sun
     def calculate_energy(self, age):
         c = 299792458  # Speed of light in m/s
         if age < 1e7:
@@ -45,7 +57,6 @@ class Chart:
         else:
             return (1.215e25)/365/24/60/60
     
-    # Calculates gamma factor
     def calculate_gamma(self, phase_name):
 
         phase = self.get_star_phase(phase_name)
@@ -68,9 +79,10 @@ class Chart:
         c = 299792458  # Speed of light in m/s
         return 1 / math.sqrt(1 - (2 * 6.67 * 10**-11 * mass) / (radius * c**2))
 
-    # Draw chart on screen
     def draw(self, years,temperature=None):
-        
+        """
+        Draws the info chart on the screen.
+        """
         WHITE = (255, 255, 255)
         BLACK = (0, 0, 0)
 
