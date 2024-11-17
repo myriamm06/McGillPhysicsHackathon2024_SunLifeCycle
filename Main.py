@@ -22,7 +22,7 @@ class Main:
         self.chart = Chart(self.screen)
         # Matplotlib Figure for the graph
         self.figure = Figure(figsize=(5.2, 4), dpi=80)
-        self.ax = self.figure.add_subplot(110)
+        self.ax = self.figure.add_subplot(111)
         self.ax.set_title("Temperature of the Sun's Surface vs Time")
         self.ax.set_xlabel("Time (Years)")
         self.ax.set_ylabel("Temperature (K)")
@@ -31,6 +31,20 @@ class Main:
         self.temp_values = []  # y-axis values
         self.canvas = FigureCanvas(self.figure)
         self.running = True
+
+                # Initialize Pygame and mixer
+        pygame.mixer.pre_init(44100, -16, 2, 512)
+        pygame.init()  # Initialize pygame after preinitializing the mixer
+
+        # Load and play background music
+        self.background_music = pygame.mixer.Sound("background_music.ogg")
+        self.background_music.set_volume(1.0)  # Ensure volume is at maximum
+        self.background_music.play(loops=-1)  # Play the music on a loop
+
+        if not pygame.mixer.get_init():
+            print("Pygame mixer not initialized properly!")
+        else:
+            print("Pygame mixer initialized successfully!")
 
     def calculate_temperature(self, time):
         """
@@ -68,6 +82,11 @@ class Main:
         raw_data = self.canvas.buffer_rgba()
         plot_surface = pygame.image.frombuffer(raw_data, self.canvas.get_width_height(), "RGBA")
         self.screen.blit(plot_surface, (0, 0))
+        self.graph_surface = None
+
+    def update_graph(self):
+        """Generate the graph and convert it to a Pygame surface."""
+        self.graph_surface = self.graph.plot_pressure_profile()
 
     def run(self):
         # Main Loop
@@ -99,7 +118,8 @@ class Main:
             age = self.slider.current_value
             self.chart.draw(age)
             pygame.display.flip()
-
+            
+        self.background_music.stop()
         pygame.quit()
         sys.exit()
 
