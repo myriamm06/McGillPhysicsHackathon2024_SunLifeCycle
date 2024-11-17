@@ -3,6 +3,7 @@ import sys
 
 # Slider class
 class Slider:
+    # Slider constructor
     def __init__(self, x, y, width, min_value, max_value, screen):
         self.x = x
         self.y = y
@@ -16,9 +17,11 @@ class Slider:
         self.screen = screen
         self.dragging = False
 
+    # Calculate the value to be displayed
     def calculate_value(self):
         return (self.handle_x - self.x) / self.width * (self.max_value - self.min_value)
 
+    # Function that draws the slider
     def draw(self, font, ticks=10):
         # Draw the slider
         pygame.draw.rect(self.screen, (200, 200, 200), (self.x, self.y - self.height // 2, self.width, self.height))
@@ -27,16 +30,13 @@ class Slider:
         for i in range(ticks + 1):
             tick_x = self.x + i * (self.width / ticks)
             pygame.draw.line(self.screen, (0, 0, 0), (tick_x, self.y - 10), (tick_x, self.y + 10), 2)
-        
-            # # Draw numbers
-            # tick_value = self.min_value + i * (self.max_value - self.min_value) / ticks
-            # number_text = font.render(f"{tick_value:.2e}", True, (0, 0, 0))
-            # self.screen.blit(number_text, (tick_x - number_text.get_width() // 2, self.y + 15))
 
         # Display the current value
         value_text = font.render(f"Age in years: {self.current_value:.2e}", True, (255, 255, 255))
         self.screen.blit(value_text, (self.x + self.width // 2 - value_text.get_width() // 2, self.y - 40))
         pygame.draw.circle(self.screen, (255, 246, 0), (self.handle_x, self.y), self.handle_radius)
+    
+    # Function that handles the slider action (Event handler)
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left mouse button
